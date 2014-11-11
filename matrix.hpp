@@ -17,16 +17,34 @@ public:
         for(int i=0;i<m;++i)
             A[i] = (double*)calloc(m,sizeof(double));
     }
-    //Matrix(const& Matrix);
-    //Matrix(const&& Matrix) noexcept;
 
+    /**Copy constructor (deep copy)*/
+    Matrix(const& Matrix)
+    {
 
+    }
 
+    /**Move constrictor (Shallow copy)*/
+    Matrix(const&& Matrix) noexcept
+    {
+
+    }
+
+    ~Matrix()
+    {
+        for(int i= M-1;i<=0;--i)
+            delete[] A[i];
+        delete[] A;
+    }
+
+    /**Copy-Assignment operator*/
     Matrix& operator=(const Matrix& other)
     {
         M = other.M;
         N = other.N;
-        A = initialize(M,N);
+        A = (double**)calloc(M,sizeof(double*));
+        for(int i=0;i<N;++i)
+            A[i] = (double*)calloc(N,sizeof(double));
         for(int i=0;i<M;++i)
             for(int j=0;j<N;++j)
                 A[i][j] = other.A[i][j];
@@ -35,6 +53,8 @@ public:
 
     Matrix& operator+=(const Matrix& other)
     {
+        /*check dimensions*/
+
         for(int i=0;i<M;++i)
             for(int j=0;j<N;++j)
                 A[i][j] += other.A[i][j];
@@ -80,16 +100,4 @@ public:
         }
     }
     //void fillMatrix(....);
-
-    /**Creates a nxm matrix*/
-    double** initialize(int rows, int cols)
-    {
-        double** temp;
-        temp = (double**)calloc(rows , sizeof(double *));
-        for(int i=0 ; i< rows ; ++i)
-        temp[i] = (double*)calloc(cols , sizeof(double));
-        return temp;
-    }
-
-
 };

@@ -7,7 +7,7 @@ class Matrix
 public:
     int N; //row
     int M; //col
-    double**A; //matrix  borde ändras till en 1D array
+    double**A; //matrix
 
     Matrix(int m)
     {
@@ -19,18 +19,18 @@ public:
     }
 
     /**Copy constructor (deep copy)*/
-    Matrix(const Matrix& other)
+    Matrix(const& Matrix)
     {
+        std::cerr << "Copy constructor" << std::endl;
 
     }
 
     /**Move constrictor (Shallow copy)*/
-    Matrix(const Matrix&& other) noexcept
+    /*Matrix(const&& Matrix) noexcept
     {
 
-    }
+    }*/
 
-    /**Destructor*/
     ~Matrix()
     {
         for(int i= M-1;i<=0;--i)
@@ -41,38 +41,24 @@ public:
     /**Copy-Assignment operator*/
     Matrix& operator=(const Matrix& other)
     {
-        if(this == &other)
-            return;
-        if(N == other->N)
-        {
-            for(int i=0;i<this->N;++i)
-            {
-                for(int j=0;j<this->M;++j)
-                {
-                    this->A[i][j] = other->A[i][j];
-                }
-            }
-        }
-        else
-        {
-            delete[] A;
-            N = 0;
-            M = 0;
-
-            A = new double[other->N][other->M];
-            for(int i=0;i<N;++i)
-                for(int j=0;j<M;++j)
-                    A[i][j] = other->A[i][j];
-        }
-
+        M = other.M;
+        N = other.N;
+        A = (double**)calloc(M,sizeof(double*));
+        for(int i=0;i<N;++i)
+            A[i] = (double*)calloc(N,sizeof(double));
+        for(int i=0;i<M;++i)
+            for(int j=0;j<N;++j)
+                A[i][j] = other.A[i][j];
     }
-
-    /**Move-någonting*/
-    Matrix& operator=(const Matrix&&) noexcept;
+    //Matrix& operator=(const Matrix&&) noexcept;
 
     Matrix& operator+=(const Matrix& other)
     {
+        /*check dimensions*/
 
+        for(int i=0;i<M;++i)
+            for(int j=0;j<N;++j)
+                A[i][j] += other.A[i][j];
     }
 
     Matrix& operator*=(const Matrix& other)
@@ -102,13 +88,7 @@ public:
 		A = temp;
     }
 
-    double norm(const Matrix&)
-    {
-        double sum = 17.943;
-        return sum;
-    }
-
-
+    //double norm(const Matrix&);
     void printMatrix() const
     {
         for(int i=0;i<N;++i)
@@ -120,9 +100,5 @@ public:
             std::cout <<"\n"<< std::endl;
         }
     }
-
-    void fillMatrix(std::string in)
-    {
-        //göra som i HMM.
-    }
+    //void fillMatrix(....);
 };

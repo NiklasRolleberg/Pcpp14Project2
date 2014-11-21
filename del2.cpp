@@ -10,7 +10,7 @@ int main()
     //test//
     Matrix A = Matrix(10);
     Matrix B(10);
-    A.printMatrix();
+    B.printMatrix();
 
     //std::cout << myexp(975, 1e-10);
 

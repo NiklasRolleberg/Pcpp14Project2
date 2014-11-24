@@ -6,32 +6,38 @@ class Matrix
 
 public:
     int N; //row
-    int M; //col
     double* A; //matrix  borde ändras till en 1D array
 
-    Matrix(int m)
+    Matrix(int n)
     {
-        N = m;
+        N = n;
         //M = m;
-        A = new double[m*m];
-        //A = (double*)calloc(N*N,sizeof(double));
+        A = new double[n*n];
+        for(int i=0;i<N*N;++i)
+            A[i] = 0;
     }
 
     /**Copy constructor (deep copy)*/
     Matrix(const Matrix& other)
     {
-
+        N = other.N;
+        A = new double[N*N];
+        for(int i=0;i<N*N;++i)
+        {
+            A[i] = other.A[i];
+        }
     }
 
-    /**Move constrictor (Shallow copy)*/
-    Matrix(const Matrix&& other) noexcept
+    /**Move constructor (Shallow copy)*/
+    Matrix(const Matrix&& other) noexcept //Onödig
     {
-
+        std::cerr << "Copy constructor" << std::endl;
     }
 
     /**Destructor*/
     ~Matrix()
     {
+        std::cerr << "Destructor" << std::endl;
         delete[] A;
     }
 
@@ -41,6 +47,7 @@ public:
         /*
         if(&this == other)
             return;
+        */
         if(N == other.N)
         {
             for(int i=0;i<N*N;++i)
@@ -58,29 +65,32 @@ public:
             for(int i=0;i<N*N;++i)
                 A[i] = other.A[i];
         }
-        */
     }
 
     /**Move-någonting*/
     Matrix& operator=(const Matrix&& other) noexcept
     {
-
+        std::cerr << "Move operator nr1" << std::endl;
     }
 
     Matrix& operator+=(const Matrix& other)
     {
+        std::cerr << "+=" << std::endl;
 
     }
 
     Matrix& operator*=(const Matrix& other)
     {
-
+        std::cerr << "*=" << std::endl;
     }
 
-    double norm(const Matrix&)
+    /**Frobenius norm*/
+    double norm()
     {
-        double sum = 17.943;
-        return sum;
+        double sum = 0;
+        for(int i=0;i<N*N;++i)
+            sum += A[i]*A[i];
+        return sqrt(sum);
     }
 
 

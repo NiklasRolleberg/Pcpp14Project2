@@ -14,16 +14,26 @@ int main()
     //Matrix test3 = test2;
     //test2.printMatrix();
 
-    Matrix t1("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
-    Matrix t2("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
-    Matrix t3(4);
+    //Matrix t1("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
+    //Matrix t2("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
+    //Matrix t3(4);
+
+    Matrix t1(40);
+    Matrix t2(40);
+    Matrix t3(40);
+    Matrix t4(40);
+    Matrix t5(40);
+    Matrix t6(40);
+    Matrix t7(40);
+    Matrix t8(40);
+    Matrix t9(40);
 
     std::cout << "t1 norm = " << t1.norm() << std::endl;
-    t1.printMatrix();
+    //t1.printMatrix();
     std::cout << "\nt2 norm = " << t2.norm() << std::endl;
-    t2.printMatrix();
+    //t2.printMatrix();
     std::cout << "\nt3 norm = " << t3.norm() << std::endl;
-    t3.printMatrix();
+    //t3.printMatrix();
 
     //std::cout << "\nt3 (=t1)" << std::endl;
     //Matrix t3(4);// = t1;

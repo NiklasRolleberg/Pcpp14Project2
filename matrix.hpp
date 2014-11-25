@@ -111,7 +111,6 @@ public:
         return sqrt(sum);
     }
 
-
     void printMatrix() const
     {
         for(int i=0;i<N;++i)

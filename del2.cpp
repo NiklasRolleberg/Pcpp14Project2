@@ -16,17 +16,17 @@ int main()
 
     Matrix t1("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
     Matrix t2("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
+    Matrix t3(4);
 
-    //Matrix t1(4);
-    //Matrix t2(4);
-
-    std::cout << "t1" << std::endl;
+    std::cout << "t1 norm = " << t1.norm() << std::endl;
     t1.printMatrix();
-    std::cout << "\nt2" << std::endl;
+    std::cout << "\nt2 norm = " << t2.norm() << std::endl;
     t2.printMatrix();
+    std::cout << "\nt3 norm = " << t3.norm() << std::endl;
+    t3.printMatrix();
 
-    std::cout << "\nt3 (=t1)" << std::endl;
-    Matrix t3(4);// = t1;
+    //std::cout << "\nt3 (=t1)" << std::endl;
+    //Matrix t3(4);// = t1;
     //Matrix t3("2 2 0.1 0.2 0.3 0.4");// = t1;
     //Matrix t3(t1);
     //t3.printMatrix();

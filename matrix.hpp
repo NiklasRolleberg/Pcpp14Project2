@@ -15,13 +15,17 @@ public:
         std::cerr << "constructor 0" << std::endl;
     }
 
+    /**unit matrix*/
     Matrix(int n)
     {
         N = n;
-        //M = m;
         A = new double[n*n];
         for(int i=0;i<N*N;++i)
+        {
             A[i] = 0;
+        }
+        for(int i=0;i<N*N;i+=(N+1))
+            A[i] = 1;
     }
 
     Matrix(std::string in)
@@ -90,7 +94,6 @@ public:
     {
         std::cerr << "+=" << std::endl;
         return *this;
-
     }
 
     Matrix& operator*=(const Matrix& other)

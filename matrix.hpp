@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
+#include <sstream>
 class Matrix
 {
 
@@ -15,6 +16,11 @@ public:
         A = new double[n*n];
         for(int i=0;i<N*N;++i)
             A[i] = 0;
+    }
+
+    Matrix(std::string in)
+    {
+        fillMatrix(in);
     }
 
     /**Copy constructor (deep copy)*/
@@ -108,6 +114,25 @@ public:
 
     void fillMatrix(std::string in)
     {
-        //göra som i HMM.
+        int row;
+        int col;
+
+        std::istringstream iss;
+		iss.str(in);
+		iss >> row >> col;
+
+        if(row!=col)
+            exit(1);
+
+		if(N!=0)
+        {
+            delete[] A;
+        }
+
+        N = row;
+        A = new double[N*N];
+
+        for(int i=0;i<N*N;++i)
+            iss >> A[i];
     }
 };

@@ -9,12 +9,17 @@ int main()
 {
 
     //test//
-    Matrix test1 = Matrix(10);
-    Matrix test2(10);
-    Matrix test3 = test2;
-    test2.printMatrix();
+    //Matrix test1 = Matrix(10);
+    //Matrix test2(10);
+    //Matrix test3 = test2;
+    //test2.printMatrix();
+
+    Matrix t1 = Matrix("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
+    //Matrix t2 = Matrix("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
+    t1.printMatrix();
     std::cout << "\n\n" << std::endl;
-    test3.printMatrix();
+    //t2.printMatrix();
+    //test3.printMatrix();
     //std::cout << myexp(975, 1e-10);
     Matrix A = Matrix(10);
     //Matrix B = myMatrixExp(A,10e-4);

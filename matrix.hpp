@@ -144,7 +144,6 @@ public:
 				double t = 0;
 				for(int k=0;k<N;++k)
 					t+= (A[k+i*N] * other.A[j+k*N]);
-                //t+= (A[i][k] * other.A[k][j]);
 				temp[j+i*N] = t;
 			}
 		}

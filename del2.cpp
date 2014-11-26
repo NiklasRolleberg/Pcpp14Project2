@@ -21,7 +21,7 @@ int main()
     Matrix skrivTest("3 3 0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 1.1 1.2");
     skrivTest.printMatrix();
     */
-
+    /*
     Matrix v1;
     Matrix V2;
     Matrix V3;
@@ -49,7 +49,7 @@ int main()
     double t = 0.5;
     v1*= t;
     v1.printMatrix();
-
+    */
 
     //std::cout << "\nt3 (=t1)" << std::endl;
     //Matrix t3(4);// = t1;
@@ -63,6 +63,32 @@ int main()
     //Matrix A = Matrix(10);
     //Matrix B = myMatrixExp(A,10e-4);
 
+    Matrix A("3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0");
+    Matrix B("3 3 9.0 8.0 7.0 6.0 5.0 4.0 3.0 2.0 1.0");
+
+    std::cout << "A:" << std::endl;
+    A.printMatrix();
+    std::cout << "\nB:" << std::endl;
+    B.printMatrix();
+
+
+    //Funkar
+    std::cout << "\nA*B:" << std::endl;
+    A*=B;
+    A.printMatrix();
+
+
+    //Funkar
+    std::cout << "\nA+B:" << std::endl;
+    A+=B;
+    A.printMatrix();
+
+    /* Funkar inte
+    std::cout << "\nA*0.5:" << std::endl;
+    double t = 0.5;
+    A*=t;
+    A.printMatrix();
+    */
 	return 0;
 }
 

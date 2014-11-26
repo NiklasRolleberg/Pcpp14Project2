@@ -7,6 +7,8 @@ Matrix myMatrixExp(Matrix x, double tol);
 
 int main()
 {
+    std::string temp;
+    std::cin >> temp;
 
     //test//
     //Matrix test1 = Matrix(10);
@@ -14,26 +16,40 @@ int main()
     //Matrix test3 = test2;
     //test2.printMatrix();
 
-    //Matrix t1("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
-    //Matrix t2("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
+    /*
+    std::cout << "Matrix:\n0 1 2\n3 4 5\n6 7 8\nSamma matrix:\n" << std::endl;
+    Matrix skrivTest("3 3 0.0 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 1.1 1.2");
+    skrivTest.printMatrix();
+    */
+
+    Matrix v1;
+    Matrix V2;
+    Matrix V3;
+
+    Matrix t1("4 4 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.1 0.1 0.1 0.0 0.8 0.8 0.1 0.1 0.0");
+    Matrix t2("4 4 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.0 0.0 0.0 0.9 0.1 0.1 0.0 0.0 0.9");
     //Matrix t3(4);
 
-    Matrix t1(40);
-    Matrix t2(40);
-    Matrix t3(40);
-    Matrix t4(40);
-    Matrix t5(40);
-    Matrix t6(40);
-    Matrix t7(40);
-    Matrix t8(40);
-    Matrix t9(40);
-
     std::cout << "t1 norm = " << t1.norm() << std::endl;
-    //t1.printMatrix();
+    t1.printMatrix();
     std::cout << "\nt2 norm = " << t2.norm() << std::endl;
-    //t2.printMatrix();
-    std::cout << "\nt3 norm = " << t3.norm() << std::endl;
-    //t3.printMatrix();
+    t2.printMatrix();
+
+    std::cout << "\ntest_2"<< std::endl;
+    v1 = t1;
+    std::cout << "Before" << std::endl;
+    v1.printMatrix();
+
+    std::cout << "\nAfter 1" << std::endl;
+    Matrix temp1(v1.N);
+    v1+= temp1;
+    v1.printMatrix();
+
+    std::cout << "\nAfter 2" << std::endl;
+    double t = 0.5;
+    v1*= t;
+    v1.printMatrix();
+
 
     //std::cout << "\nt3 (=t1)" << std::endl;
     //Matrix t3(4);// = t1;

@@ -30,7 +30,28 @@ public:
 
     Matrix(std::string in)
     {
-        fillMatrix(in);
+        std::cerr << "fillmatrix" << std::endl;
+        int row;
+        int col;
+
+
+        std::istringstream iss;
+		iss.str(in);
+		iss >> row >> col;
+
+        if(row!=col || row == 0)
+        {
+            std::cerr << "fel dim" << std::endl;
+            exit(1);
+        }
+
+        delete[] A;
+        N = row;
+        A = new double[N*N];
+
+        //assert( f != null );
+        for(int i=0;i<N*N;++i)
+            iss >> A[i];
     }
 
     /**Copy constructor (deep copy)*/
@@ -92,13 +113,54 @@ public:
 
     Matrix& operator+=(const Matrix& other)
     {
-        std::cerr << "+=" << std::endl;
+        std::cerr << "+= operator" << std::endl;
+
+        if(N != other.N)
+        {
+            std::cerr << "fel dim" << std::endl;
+            exit(1);
+        }
+
+        for(int i=0;i<N*N;++i)
+            A[i] += other.A[i];
+
         return *this;
     }
 
+    /**Matrix x Matrix*/
     Matrix& operator*=(const Matrix& other)
     {
         std::cerr << "*=" << std::endl;
+
+        if(N!= other.N)
+            exit(1);
+
+        double temp[N*N];
+
+        for (int i=0;i<N;++i)
+		{
+			for(int j=0;j<N;++j)
+			{
+				double t = 0;
+				for(int k=0;k<N;++k)
+					t+= (A[k+i*N] * other.A[j+k*N]);
+                //t+= (A[i][k] * other.A[k][j]);
+				temp[j+i*N] = t;
+			}
+		}
+
+        for(int i=0;i<N*N;++i)
+            A[i] = temp[i];
+
+        //delete[] temp;
+        return *this;
+    }
+
+    Matrix& operator*=(const double& d)
+    {
+        std::cerr << "*= (double)" << std::endl;
+        for(int i=0;i<N*N;++i)
+            A[i] *= d;
         return *this;
     }
 
@@ -111,40 +173,16 @@ public:
         return sqrt(sum);
     }
 
+    /**Printmatrix*/
     void printMatrix() const
     {
         for(int i=0;i<N;++i)
         {
             for(int j=0;j<N;++j)
             {
-                std::cout << A[i+j*N] << "  ";//<< "(" << i+j*N << ")  ";
+                std::cout << A[j+i*N] << "  ";//<< "(" << i+j*N << ")  ";
             }
             std::cout <<"\n"<< std::endl;
         }
-    }
-
-    /**kanske funkar*/
-    void fillMatrix(std::string in)
-    {
-        int row;
-        int col;
-
-        std::istringstream iss;
-		iss.str(in);
-		iss >> row >> col;
-
-        if(row!=col || row == 0)
-        {
-            std::cerr << "fel dim" << std::endl;
-            exit(1);
-        }
-
-        delete[] A;
-        N = row;
-        A = new double[N*N];
-
-        for(int i=0;i<N*N;++i)
-            iss >> A[i];
-        std::cerr << "fill Matrix done" << std::endl;
     }
 };

@@ -7,8 +7,8 @@ Matrix myMatrixExp(Matrix x, double tol);
 
 int main()
 {
-    std::string temp;
-    std::cin >> temp;
+    //std::string temp;
+    //std::cin >> temp;
 
     //test//
     //Matrix test1 = Matrix(10);
@@ -32,8 +32,8 @@ int main()
 
     std::cout << "t1 norm = " << t1.norm() << std::endl;
     t1.printMatrix();
-    std::cout << "\nt2 norm = " << t2.norm() << std::endl;
-    t2.printMatrix();
+    //std::cout << "\nt2 norm = " << t2.norm() << std::endl;
+    //t2.printMatrix();
 
     std::cout << "\ntest_2"<< std::endl;
     v1 = t1;
@@ -41,8 +41,8 @@ int main()
     v1.printMatrix();
 
     std::cout << "\nAfter 1" << std::endl;
-    Matrix temp1(v1.N);
-    v1+= temp1;
+    //Matrix temp1(v1.N);
+    v1+= t2;
     v1.printMatrix();
 
     std::cout << "\nAfter 2" << std::endl;

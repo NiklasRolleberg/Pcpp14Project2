@@ -2,6 +2,7 @@
 #include <cmath>
 #include "matrix.hpp"
 
+double t;
 double myexp(double x, double tol);
 Matrix myMatrixExp(Matrix x, double tol);
 
@@ -72,7 +73,7 @@ int main()
     B.printMatrix();
 
 
-    //Funkar
+   /* //Funkar
     std::cout << "\nA*B:" << std::endl;
     A*=B;
     A.printMatrix();
@@ -83,32 +84,38 @@ int main()
     A+=B;
     A.printMatrix();
 
-    /* Funkar inte
     std::cout << "\nA*0.5:" << std::endl;
-    double t = 0.5;
+    t = 0.5;
     A*=t;
-    A.printMatrix();
-    */
+    A.printMatrix();*/
+
+    std::cout << "\nMatrix exponent" << std::endl;
+    myMatrixExp(A, 10e-6).printMatrix();
+
 	return 0;
 }
 
 
 Matrix myMatrixExp(Matrix X, double tol)
 {
-    int N = 10;
+    int N = 200;
     double expX = 7; //ska bytas ut till någon norm
     Matrix mexp  = Matrix(X.N);
-    while (fabs( mexp.norm() - expX) > tol)
-    {
-        break;
+    Matrix I = Matrix(X.N);
+    Matrix temp;
+    //while (fabs( mexp.norm() - expX) > tol)
+    //{
+        //break;
         for(int i=N; i>0; i--)
         {
-            //myExp *= x/i;
-            //myExp += 1.;
+            temp = X;
+            temp *= 1./i;
+            mexp *= temp;
+            mexp += I;
         }
         //std::cout << myExp << std::endl;
-        N += 10;
-    }
+        //N += 10;
+    //}
     return mexp;
 }
 

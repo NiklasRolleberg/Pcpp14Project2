@@ -155,12 +155,22 @@ public:
         return *this;
     }
 
+    /**Matrix x double*/
     Matrix& operator*=(const double& d)
     {
         std::cerr << "*= (double)" << std::endl;
         for(int i=0;i<N*N;++i)
             A[i] *= d;
         return *this;
+    }
+
+    /**Matrix x double*/
+    Matrix operator*(const double rhs)
+    {
+		Matrix temp(N);
+		for(int i=0;i<N*N;++i)
+            temp.A[i] = A[i]*rhs;
+		return temp;
     }
 
     /**Frobenius norm*/

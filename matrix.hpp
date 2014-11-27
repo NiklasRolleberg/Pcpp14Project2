@@ -12,7 +12,7 @@ public:
     Matrix()
     {
         N = 0;
-        std::cerr << "constructor 0" << std::endl;
+        //std::cerr << "constructor 0" << std::endl;
     }
 
     /**unit matrix*/
@@ -30,7 +30,7 @@ public:
 
     Matrix(std::string in)
     {
-        std::cerr << "fillmatrix" << std::endl;
+        //std::cerr << "fillmatrix" << std::endl;
         int row;
         int col;
 
@@ -57,7 +57,7 @@ public:
     /**Copy constructor (deep copy)*/
     Matrix(const Matrix& other)
     {
-        std::cerr << "Copy constructor" << std::endl;
+        //std::cerr << "Copy constructor" << std::endl;
         N = other.N;
         A = new double[N*N];
         for(int i=0;i<N*N;++i)
@@ -77,14 +77,14 @@ public:
     /**Destructor*/
     ~Matrix()
     {
-        std::cerr << "Destructor" << std::endl;
+        //std::cerr << "Destructor" << std::endl;
         delete[] A;
     }
 
     /**Copy-Assignment operator*/
     Matrix& operator=(const Matrix& other)
     {
-        std::cerr << "Copy assignment operator" << std::endl;
+        //std::cerr << "Copy assignment operator" << std::endl;
         /*
         if(&this == other)
             return;
@@ -117,7 +117,7 @@ public:
 
     Matrix& operator+=(const Matrix& other)
     {
-        std::cerr << "+= operator" << std::endl;
+        //std::cerr << "+= operator" << std::endl;
 
         if(N != other.N)
         {
@@ -134,7 +134,7 @@ public:
     /**Matrix x Matrix*/
     Matrix& operator*=(const Matrix& other)
     {
-        std::cerr << "*=" << std::endl;
+        //std::cerr << "*= operator" << std::endl;
 
         if(N!= other.N)
             exit(1);
@@ -162,7 +162,7 @@ public:
     /**Matrix x double*/
     Matrix& operator*=(const double& d)
     {
-        std::cerr << "*= (double)" << std::endl;
+        //std::cerr << "*= (double)" << std::endl;
         for(int i=0;i<N*N;++i)
             A[i] *= d;
         return *this;
@@ -171,7 +171,7 @@ public:
     /**Matrix x double*/
     Matrix operator*(const double rhs)
     {
-        std::cerr << "* (matrix x double)" << std::endl;
+        //std::cerr << "* (matrix x double)" << std::endl;
 		Matrix temp(N);
 		for(int i=0;i<N*N;++i)
             temp.A[i] = A[i]*rhs;

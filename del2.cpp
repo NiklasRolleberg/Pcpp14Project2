@@ -27,9 +27,23 @@ int main()
 
 void matlabExpm(Matrix in)
 {
-    double* temp = new double[in.N];
+    double* temp = new double[in.N*in.N];
+    for(int i=0;i<in.N;++i)
+        for(int j=0;j<in.N;++j)
+            temp[j+i*in.N] = in.A[i+j*in.N];
 
+    //GÖRA NÅGONTING!
+
+    for(int i=0;i<in.N;++i)
+    {
+        for(int j=0;j<in.N;++j)
+        {
+            std::cout << temp[i+j*in.N] << "  ";
+        }
+        std::cout << "\n" << std::endl;
+    }
 }
+
 
 Matrix myMatrixExp(Matrix X, double tol)
 {

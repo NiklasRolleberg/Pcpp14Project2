@@ -27,13 +27,12 @@ public:
             A[i] = 1;
     }
 
-    /**Creates a matrix with numbers*/
+    /**Creates a matrix with numbers from a string*/
     Matrix(std::string in)
     {
         //std::cerr << "fillmatrix" << std::endl;
         int row;
         int col;
-
 
         std::istringstream iss;
 		iss.str(in);
@@ -51,6 +50,45 @@ public:
 
         for(int i=0;i<N*N;++i)
             iss >> A[i];
+    }
+
+    /**Creates a matrix with numbers from user input*/
+    Matrix(int ett, int tva)
+    {
+        int S;
+
+        std::cout << "What size? ";
+        std::cin >> S;
+
+        if(S<=0)
+        {
+            std::cerr << "FEL!" << std::endl;
+            exit(1);
+        }
+
+        delete[] A;
+        N = S;
+        A = new double[N*N];
+
+        int k = 0;
+        for(int i=0;i<N;++i)
+        {
+            for(int j=0;j<N;j++)
+            {
+                std::cout << k++ << "  ";
+            }
+            std::cout << "\n" << std::endl;
+        }
+
+
+        std::cout << "Write the elements" << std::endl;
+        for(int i=0;i<N*N;++i)
+        {
+            std::cout << "Element " << i << " : ";
+            //A[i] = rand()%10;
+            std::cin >> A[i];
+        }
+
     }
 
     /**Copy constructor (deep copy)*/

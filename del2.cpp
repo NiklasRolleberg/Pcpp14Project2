@@ -16,27 +16,25 @@ void all(Matrix A);
 
 int main()
 {
-    string svar;
-    cout << "Vill du skriva in matrisen själv?" << endl;
+
+    cout << "Do you want to write the matrix yourself? (yes/no)" << endl;
+    string svar="";
     cin >> svar;
-    if (svar == "ja")
+    if(svar == "yes")
     {
-        cout << "Skriv en matris på formen:\nrows cols elm1 elm2 elm3... (matrisen skrivs rad for rad)";
-        svar ="";
-        cin >> svar;
-        Matrix A(svar);
+        Matrix A(7,1);
+        cout << "\n\nMatrix:" << endl;
+        A.printMatrix();
+        all(A);
     }
+    else
     {
-        svar = "3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0";
+        Matrix A("3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0");
+
+        cout << "\nMatrix:" << endl;
+        A.printMatrix();
+        all(A);
     }
-
-
-    Matrix A(svar);
-
-    cout << "Matrix:" << endl;
-    A.printMatrix();
-    all(A);
-
 	return 0;
 }
 
@@ -81,13 +79,13 @@ Matrix matlabExpm(Matrix in)
 /**Computes the matrix exponent with horners method */
 Matrix myMatrixExp(Matrix X, double tol)
 {
-    int N = 10;
+    int N = 100;
     double newNorm = 1;
     double oldNorm = 0;
     Matrix mexp  = Matrix(X.N);
     Matrix I = Matrix(X.N);
 
-    while (fabs(newNorm - oldNorm) > tol)
+    while (fabs(newNorm - oldNorm) > tol/N)
     {
         oldNorm = newNorm;
         for(int i=N; i>0; i--)
@@ -96,10 +94,11 @@ Matrix myMatrixExp(Matrix X, double tol)
             mexp += I;
         }
         newNorm = mexp.norm();
-        N += 10;
-        if(N > 1000)
+        N += 50;
+        if(N > 10000)
             break;
     }
+    //cerr << "N: " << N << endl;
     return mexp;
 }
 

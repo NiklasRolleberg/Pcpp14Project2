@@ -1,44 +1,35 @@
 #include <iostream>
 #include <cmath>
 #include "matrix.hpp"
+using namespace std;
+#include "r8lib.h"
+#include "r8mat_expm1.h"
 
-double t;
+void matlabExpm(Matrix in);
 double myexp(double x, double tol);
 Matrix myMatrixExp(Matrix x, double tol);
 
 int main()
 {
-    Matrix A("3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0");
-    Matrix B("3 3 9.0 8.0 7.0 6.0 5.0 4.0 3.0 2.0 1.0");
+    Matrix A("2 2 1.0 2.0 3.0 4.0");// 5.0 6.0 7.0 8.0 9.0");
 
     std::cout << "A:" << std::endl;
     A.printMatrix();
-    std::cout << "\nB:" << std::endl;
-    B.printMatrix();
 
-
-   /* //Funkar
-    std::cout << "\nA*B:" << std::endl;
-    A*=B;
-    A.printMatrix();
-
-
-    //Funkar
-    std::cout << "\nA+B:" << std::endl;
-    A+=B;
-    A.printMatrix();
-
-    std::cout << "\nA*0.5:" << std::endl;
-    t = 0.5;
-    A*=t;
-    A.printMatrix();*/
-
-    std::cout << "\nMatrix exponent" << std::endl;
+    std::cout << "\nOur matrix exponent" << std::endl;
     myMatrixExp(A, 10e-6).printMatrix();
+
+    std::cout << "\nMatlabs matrix exponent" << std::endl;
+    matlabExpm(A);
 
 	return 0;
 }
 
+void matlabExpm(Matrix in)
+{
+    double* temp = new double[in.N];
+
+}
 
 Matrix myMatrixExp(Matrix X, double tol)
 {
@@ -56,13 +47,13 @@ Matrix myMatrixExp(Matrix X, double tol)
             mexp *= X*(1./i);
             mexp += I;
         }
-        std::cout << newNorm << " " << oldNorm << std::endl << std::endl;
+        //std::cout << newNorm << " " << oldNorm << std::endl << std::endl;
         newNorm = mexp.norm();
         N += 10;
         if(N > 1000)
             break;
     }
-    std::cout << endl;
+    std::cout << std::endl;
     return mexp;
 }
 

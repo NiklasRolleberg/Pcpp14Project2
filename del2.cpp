@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <cstring>
 #include "matrix.hpp"
 using namespace std;
 #include "r8lib.h"
@@ -15,8 +16,24 @@ void all(Matrix A);
 
 int main()
 {
-    Matrix A("3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0");
-    std::cout << "Matrix:" << std::endl;
+    string svar;
+    cout << "Vill du skriva in matrisen själv?" << endl;
+    cin >> svar;
+    if (svar == "ja")
+    {
+        cout << "Skriv en matris på formen:\nrows cols elm1 elm2 elm3... (matrisen skrivs rad for rad)";
+        svar ="";
+        cin >> svar;
+        Matrix A(svar);
+    }
+    {
+        svar = "3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0";
+    }
+
+
+    Matrix A(svar);
+
+    cout << "Matrix:" << endl;
     A.printMatrix();
     all(A);
 
@@ -26,19 +43,19 @@ int main()
 /**Calculates exponents and compares*/
 void all(Matrix A)
 {
-    std::cout << "\nOur matrix exponent" << std::endl;
+    cout << "\nOur matrix exponent" << endl;
     Matrix myMatrix = myMatrixExp(A, 10e-6);
     myMatrix.printMatrix();
 
-    std::cout << "\nMatlab matrix exponent" << std::endl;
+    cout << "\nMatlab matrix exponent" << endl;
     Matrix matlabMatrix = matlabExpm(A);
     matlabMatrix.printMatrix();
 
-    std::cout << "\nError (Our matrix exponent - matlab exponent)" << std::endl;
+    cout << "\nError (Our matrix exponent - matlab exponent)" << endl;
     myMatrix -= matlabMatrix;
     myMatrix.printMatrix();
 
-    std::cout << "Error (norm) " << myMatrix.norm();
+    cout << "Error (norm) " << myMatrix.norm();
 
 }
 

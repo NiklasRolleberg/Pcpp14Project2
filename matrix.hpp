@@ -68,6 +68,10 @@ public:
     Matrix(const Matrix&& other) noexcept //Onödig
     {
         std::cerr << "Move constructor" << std::endl;
+        N = other.N;
+        A = other.A;
+        //other.N = 0;
+        //other.A  = nullptr;
     }
 
     /**Destructor*/
@@ -107,7 +111,7 @@ public:
     /**Move-någonting*/
     Matrix& operator=(const Matrix&& other) noexcept
     {
-        std::cerr << "Move operator nr1" << std::endl;
+        std::cerr << "Move operator (&&)" << std::endl;
         return *this;
     }
 
@@ -167,6 +171,7 @@ public:
     /**Matrix x double*/
     Matrix operator*(const double rhs)
     {
+        std::cerr << "* (matrix x double)" << std::endl;
 		Matrix temp(N);
 		for(int i=0;i<N*N;++i)
             temp.A[i] = A[i]*rhs;

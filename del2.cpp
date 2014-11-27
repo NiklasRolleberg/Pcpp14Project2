@@ -19,16 +19,17 @@ int main()
 
     std::cout << "A:" << std::endl;
     A.printMatrix();
-    //all(A);
+    all(A);
 
-//    std::cout << "\nOur matrix exponent" << std::endl;
-//    Matrix myMatrix = myMatrixExp(A, 10e-6);
-//    myMatrix.printMatrix();
+    /*
+    std::cout << "\nOur matrix exponent" << std::endl;
+    Matrix myMatrix = myMatrixExp(A, 10e-6);
+    myMatrix.printMatrix();
 
     std::cout << "\nMatlabs matrix exponent" << std::endl;
     Matrix matlabMatrix = matlabExpm(A);
-    //matlabMatrix.printMatrix();
-
+    matlabMatrix.printMatrix();
+    */
 
 
 	return 0;
@@ -36,17 +37,17 @@ int main()
 
 void all(Matrix A)
 {
-//    std::cout << "\nOur matrix exponent" << std::endl;
-//    Matrix myMatrix = myMatrixExp(A, 10e-6);
-//    myMatrix.printMatrix();
-//
-//    std::cout << "\nMatlabs matrix exponent" << std::endl;
-//    Matrix matlabMatrix = matlabExpm(A);
-//    matlabMatrix.printMatrix();
-//
-//    std::cout << "\nmyMatrix - matlabMatrix" << std::endl;
-//    myMatrix -= matlabMatrix;
-//    myMatrix.printMatrix();
+    std::cout << "\nOur matrix exponent" << std::endl;
+    Matrix myMatrix = myMatrixExp(A, 10e-6);
+    myMatrix.printMatrix();
+
+    std::cout << "\nMatlabs matrix exponent" << std::endl;
+    Matrix matlabMatrix = matlabExpm(A);
+    matlabMatrix.printMatrix();
+
+    std::cout << "\nmyMatrix - matlabMatrix" << std::endl;
+    myMatrix -= matlabMatrix;
+    myMatrix.printMatrix();
 }
 
 Matrix matlabExpm(Matrix in)
@@ -57,20 +58,26 @@ Matrix matlabExpm(Matrix in)
             temp[j+i*in.N] = in.A[i+j*in.N];
 
     temp = r8mat_expm1(in.N, temp);
-    for(int i=0;i<in.N;++i)
-    {
-        for(int j=0;j<in.N;++j)
-        {
-            std::cout << temp[i+j*in.N] << " ";
-        }
-        std::cout << std::endl;
-    }
 
-
-    for(int i=0;i<in.N;++i)
-        for(int j=0;j<in.N;++j)
+    for(int i=0; i<in.N; ++i)
+        for(int j=0; j<in.N; ++j)
             in.A[i+j*in.N] = temp[j+i*in.N];
-    return in;
+
+//    std::cout << "\n\n------cout:-------" << std::endl;
+//    for(int i=0;i<in.N;++i)
+//    {
+//        for(int j=0;j<in.N;++j)
+//        {
+//            std::cout << temp[i+j*in.N] << " ";
+//        }
+//        std::cout << std::endl;
+//    }
+//    std::cout << "\n---printmatrix:---" << std::endl;
+//    in.printMatrix();
+//    std::cout << "------------------\n\n" << std::endl;
+
+    delete[] temp;
+    return Matrix(in);
 }
 
 

@@ -3,11 +3,15 @@
 #include "matrix.hpp"
 using namespace std;
 #include "r8lib.h"
+#include "r8lib.cpp"
 #include "r8mat_expm1.h"
+#include "r8mat_expm1.cpp"
 
-void matlabExpm(Matrix in);
+
+Matrix matlabExpm(Matrix in);
 double myexp(double x, double tol);
 Matrix myMatrixExp(Matrix x, double tol);
+void all(Matrix A);
 
 int main()
 {
@@ -15,33 +19,58 @@ int main()
 
     std::cout << "A:" << std::endl;
     A.printMatrix();
+    //all(A);
 
-    std::cout << "\nOur matrix exponent" << std::endl;
-    myMatrixExp(A, 10e-6).printMatrix();
+//    std::cout << "\nOur matrix exponent" << std::endl;
+//    Matrix myMatrix = myMatrixExp(A, 10e-6);
+//    myMatrix.printMatrix();
 
     std::cout << "\nMatlabs matrix exponent" << std::endl;
-    matlabExpm(A);
+    Matrix matlabMatrix = matlabExpm(A);
+    //matlabMatrix.printMatrix();
+
+
 
 	return 0;
 }
 
-void matlabExpm(Matrix in)
+void all(Matrix A)
+{
+//    std::cout << "\nOur matrix exponent" << std::endl;
+//    Matrix myMatrix = myMatrixExp(A, 10e-6);
+//    myMatrix.printMatrix();
+//
+//    std::cout << "\nMatlabs matrix exponent" << std::endl;
+//    Matrix matlabMatrix = matlabExpm(A);
+//    matlabMatrix.printMatrix();
+//
+//    std::cout << "\nmyMatrix - matlabMatrix" << std::endl;
+//    myMatrix -= matlabMatrix;
+//    myMatrix.printMatrix();
+}
+
+Matrix matlabExpm(Matrix in)
 {
     double* temp = new double[in.N*in.N];
     for(int i=0;i<in.N;++i)
         for(int j=0;j<in.N;++j)
             temp[j+i*in.N] = in.A[i+j*in.N];
 
-    //GÖRA NÅGONTING!
-
+    temp = r8mat_expm1(in.N, temp);
     for(int i=0;i<in.N;++i)
     {
         for(int j=0;j<in.N;++j)
         {
-            std::cout << temp[i+j*in.N] << "  ";
+            std::cout << temp[i+j*in.N] << " ";
         }
-        std::cout << "\n" << std::endl;
+        std::cout << std::endl;
     }
+
+
+    for(int i=0;i<in.N;++i)
+        for(int j=0;j<in.N;++j)
+            in.A[i+j*in.N] = temp[j+i*in.N];
+    return in;
 }
 
 

@@ -41,7 +41,7 @@ public:
 
         if(row!=col || row == 0)
         {
-            std::cerr << "fel dim" << std::endl;
+            //std::cerr << "fel dim" << std::endl;
             exit(1);
         }
 
@@ -67,7 +67,7 @@ public:
     /**Move constructor (Shallow copy)*/
     Matrix(const Matrix&& other) noexcept //Onödig
     {
-        std::cerr << "Move constructor" << std::endl;
+        //std::cerr << "Move constructor" << std::endl;
         N = other.N;
         A = other.A;
         //other.N = 0;
@@ -111,7 +111,7 @@ public:
     /**Move-någonting*/
     Matrix& operator=(const Matrix&& other) noexcept
     {
-        std::cerr << "Move operator (&&)" << std::endl;
+        //std::cerr << "Move operator (&&)" << std::endl;
         return *this;
     }
 
@@ -121,7 +121,7 @@ public:
 
         if(N != other.N)
         {
-            std::cerr << "fel dim" << std::endl;
+            //std::cerr << "fel dim" << std::endl;
             exit(1);
         }
 
@@ -134,7 +134,7 @@ public:
     /**Matrix x Matrix*/
     Matrix& operator*=(const Matrix& other)
     {
-        //std::cerr << "*= operator" << std::endl;
+        //std::cerr << "*=" << std::endl;
 
         if(N!= other.N)
             exit(1);
@@ -198,5 +198,21 @@ public:
             }
             std::cout <<"\n"<< std::endl;
         }
+    }
+
+    Matrix& operator-=(const Matrix& other)
+    {
+        //std::cerr << "-= operator" << std::endl;
+
+        if(N != other.N)
+        {
+            //std::cerr << "fel dim" << std::endl;
+            exit(1);
+        }
+
+        for(int i=0;i<N*N;++i)
+            A[i] -= other.A[i];
+
+        return *this;
     }
 };

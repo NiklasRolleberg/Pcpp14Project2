@@ -20,28 +20,13 @@ int main()
     A.printMatrix();
     all(A);
 
-    Matrix B("3 3 7.5 2.4 5.01 6.003 6.0 6.7 0.1 0.3 10.2");
-    std::cout << std::endl << "Matrix:" << std::endl;
-    B.printMatrix();
-    all(B);
-
-    /*
-    std::cout << "\nOur matrix exponent" << std::endl;
-    Matrix myMatrix = myMatrixExp(A, 10e-6);
-    myMatrix.printMatrix();
-
-    std::cout << "\nMatlabs matrix exponent" << std::endl;
-    Matrix matlabMatrix = matlabExpm(A);
-    matlabMatrix.printMatrix();
-    */
-
-
 	return 0;
 }
 
+/**Calculates exponents and compares*/
 void all(Matrix A)
 {
-    std::cout << "\nOur matrix exponent";
+    std::cout << "\nOur matrix exponent" << std::endl;
     Matrix myMatrix = myMatrixExp(A, 10e-6);
     myMatrix.printMatrix();
 
@@ -57,8 +42,10 @@ void all(Matrix A)
 
 }
 
+/**Computes the matrix exponent with matlabs algorithm*/
 Matrix matlabExpm(Matrix in)
 {
+    /*transpose the matrix.(our matrix is not stored Fortran-style*/
     double* temp = new double[in.N*in.N];
     for(int i=0;i<in.N;++i)
         for(int j=0;j<in.N;++j)
@@ -70,24 +57,11 @@ Matrix matlabExpm(Matrix in)
         for(int j=0; j<in.N; ++j)
             in.A[i+j*in.N] = temp[j+i*in.N];
 
-//    std::cout << "\n\n------cout:-------" << std::endl;
-//    for(int i=0;i<in.N;++i)
-//    {
-//        for(int j=0;j<in.N;++j)
-//        {
-//            std::cout << temp[i+j*in.N] << " ";
-//        }
-//        std::cout << std::endl;
-//    }
-//    std::cout << "\n---printmatrix:---" << std::endl;
-//    in.printMatrix();
-//    std::cout << "------------------\n\n" << std::endl;
-
     delete[] temp;
     return Matrix(in);
 }
 
-
+/**Computes the matrix exponent with horners method */
 Matrix myMatrixExp(Matrix X, double tol)
 {
     int N = 10;
@@ -104,16 +78,15 @@ Matrix myMatrixExp(Matrix X, double tol)
             mexp *= X*(1./i);
             mexp += I;
         }
-        //std::cout << newNorm << " " << oldNorm << std::endl << std::endl;
         newNorm = mexp.norm();
         N += 10;
         if(N > 1000)
             break;
     }
-    std::cout << std::endl;
     return mexp;
 }
 
+/**Calculates the exponent of a scalar*/
 double myexp(double x, double tol)
 {
     int N = 10;
@@ -127,7 +100,6 @@ double myexp(double x, double tol)
             myExp *= x/i;
             myExp += 1.;
         }
-        //std::cout << myExp << std::endl;
         N += 10;
     }
     return myExp;

@@ -6,13 +6,12 @@ class Matrix
 {
 
 public:
-    int N; //row
+    int N;
     double* A;
 
     Matrix()
     {
         N = 0;
-        //std::cerr << "constructor 0" << std::endl;
     }
 
     /**unit matrix*/
@@ -28,6 +27,7 @@ public:
             A[i] = 1;
     }
 
+    /**Creates a matrix with numbers*/
     Matrix(std::string in)
     {
         //std::cerr << "fillmatrix" << std::endl;
@@ -41,7 +41,7 @@ public:
 
         if(row!=col || row == 0)
         {
-            //std::cerr << "fel dim" << std::endl;
+            std::cerr << "fel dim" << std::endl;
             exit(1);
         }
 
@@ -49,7 +49,6 @@ public:
         N = row;
         A = new double[N*N];
 
-        //assert( f != null );
         for(int i=0;i<N*N;++i)
             iss >> A[i];
     }
@@ -70,8 +69,6 @@ public:
         //std::cerr << "Move constructor" << std::endl;
         N = other.N;
         A = other.A;
-        //other.N = 0;
-        //other.A  = nullptr;
     }
 
     /**Destructor*/
@@ -85,10 +82,6 @@ public:
     Matrix& operator=(const Matrix& other)
     {
         //std::cerr << "Copy assignment operator" << std::endl;
-        /*
-        if(&this == other)
-            return;
-        */
         if(N == other.N)
         {
             for(int i=0;i<N*N;++i)
@@ -108,20 +101,13 @@ public:
         return *this;
     }
 
-    /**Move-någonting*/
-    Matrix& operator=(const Matrix&& other) noexcept
-    {
-        //std::cerr << "Move operator (&&)" << std::endl;
-        return *this;
-    }
-
     Matrix& operator+=(const Matrix& other)
     {
         //std::cerr << "+= operator" << std::endl;
 
         if(N != other.N)
         {
-            //std::cerr << "fel dim" << std::endl;
+            std::cerr << "fel dim" << std::endl;
             exit(1);
         }
 
@@ -135,9 +121,11 @@ public:
     Matrix& operator*=(const Matrix& other)
     {
         //std::cerr << "*=" << std::endl;
-
         if(N!= other.N)
+        {
+            std::cout << "fel dim" << std::endl;
             exit(1);
+        }
 
         double temp[N*N];
 
@@ -168,7 +156,7 @@ public:
         return *this;
     }
 
-    /**Matrix x double*/
+    /**Matrix * double*/
     Matrix operator*(const double rhs)
     {
         //std::cerr << "* (matrix x double)" << std::endl;
@@ -176,6 +164,22 @@ public:
 		for(int i=0;i<N*N;++i)
             temp.A[i] = A[i]*rhs;
 		return temp;
+    }
+
+    /**Matrix -= matrix*/
+    Matrix& operator-=(const Matrix& other)
+    {
+        //std::cerr << "-= operator" << std::endl;
+        if(N != other.N)
+        {
+            std::cerr << "fel dim" << std::endl;
+            exit(1);
+        }
+
+        for(int i=0;i<N*N;++i)
+            A[i] -= other.A[i];
+
+        return *this;
     }
 
     /**Frobenius norm*/
@@ -187,32 +191,17 @@ public:
         return sqrt(sum);
     }
 
-    /**Printmatrix*/
+    /**Prints the matrix*/
     void printMatrix() const
     {
         for(int i=0;i<N;++i)
         {
             for(int j=0;j<N;++j)
             {
-                std::cout << A[j+i*N] << "  ";//<< "(" << i+j*N << ")  ";
+                std::cout << A[j+i*N] << "  ";
             }
             std::cout <<"\n"<< std::endl;
         }
     }
 
-    Matrix& operator-=(const Matrix& other)
-    {
-        //std::cerr << "-= operator" << std::endl;
-
-        if(N != other.N)
-        {
-            //std::cerr << "fel dim" << std::endl;
-            exit(1);
-        }
-
-        for(int i=0;i<N*N;++i)
-            A[i] -= other.A[i];
-
-        return *this;
-    }
 };

@@ -6,7 +6,8 @@ double myexp(double x, double tol);
 int main()
 {
 
-    std::cout << myexp(975, 1e-10);
+    std::cout << "exp(9) = " << myexp(9, 1e-10);
+    std::cout << std::endl << "Error: " << exp(9) - myexp(9, 1e-10);
 
 
 	return 0;

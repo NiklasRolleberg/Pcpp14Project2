@@ -15,11 +15,15 @@ void all(Matrix A);
 
 int main()
 {
-    Matrix A("2 2 1.0 2.0 3.0 4.0");// 5.0 6.0 7.0 8.0 9.0");
-
-    std::cout << "A:" << std::endl;
+    Matrix A("3 3 1.0 2.0 3.0 4.0 5.0 6.0 7.0 8.0 9.0");
+    std::cout << "Matrix:" << std::endl;
     A.printMatrix();
     all(A);
+
+    Matrix B("3 3 7.5 2.4 5.01 6.003 6.0 6.7 0.1 0.3 10.2");
+    std::cout << std::endl << "Matrix:" << std::endl;
+    B.printMatrix();
+    all(B);
 
     /*
     std::cout << "\nOur matrix exponent" << std::endl;
@@ -37,17 +41,20 @@ int main()
 
 void all(Matrix A)
 {
-    std::cout << "\nOur matrix exponent" << std::endl;
+    std::cout << "\nOur matrix exponent";
     Matrix myMatrix = myMatrixExp(A, 10e-6);
     myMatrix.printMatrix();
 
-    std::cout << "\nMatlabs matrix exponent" << std::endl;
+    std::cout << "\nMatlab matrix exponent" << std::endl;
     Matrix matlabMatrix = matlabExpm(A);
     matlabMatrix.printMatrix();
 
-    std::cout << "\nmyMatrix - matlabMatrix" << std::endl;
+    std::cout << "\nError (Our matrix exponent - matlab exponent)" << std::endl;
     myMatrix -= matlabMatrix;
     myMatrix.printMatrix();
+
+    std::cout << "Error (norm) " << myMatrix.norm();
+
 }
 
 Matrix matlabExpm(Matrix in)
